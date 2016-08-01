@@ -1,0 +1,27 @@
+{
+  "name": "lg-share.js",
+  "version": "0.0.1",
+  "description": "Social media share module for lightgallery.",
+  "main": [
+      "dist/lg-share.min.js"
+  ],
+  "keywords": [
+      "gallery",
+      "google plus",
+      "social media",
+      "facebook",
+      "twitter"
+  ],
+  "authors": [
+      "Sachin N <sachi77n@gmail.com>"
+  ],
+  "homepage": "http://sachinchoolur.github.io/lg-share.js/",
+  "repository": {
+      "type": "git",
+      "url": "git://github.com/sachinchoolur/lg-share.js.git"
+  },
+  "license": "Apache-2.0",
+  "ignore": [
+      "README.md"
+  ]
+}
