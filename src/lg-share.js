@@ -48,17 +48,47 @@ Share.prototype.init = function() {
         utils.removeClass(_this.core.outer, 'lg-dropdown-active');
     });
 
-    utils.on(_this.core.el, 'onAfterSlide.lgtm', function(event) {
+    utils.on(_this.core.el, 'onAfterSlide.lgtm', function (event) {
+        var currentItem = _this.core.items[event.detail.index],
+            fbUrl,
+            twitterUrl,
+            twitterText,
+            googlePlusUrl,
+            pinterestUrl,
+            pinterestMediaUrl,
+            pinterestText;
 
-        setTimeout(function() {
-            document.getElementById('lg-share-facebook').setAttribute('href', 'https://www.facebook.com/sharer/sharer.php?u=' + (encodeURIComponent(_this.core.items[event.detail.index].getAttribute('data-facebook-share-url') || window.location.href)));
+        setTimeout(function () {
+            if(_this.core.s.dynamic === true) {
+                fbUrl = currentItem.hasOwnProperty('data-facebook-share-url') ? currentItem['data-facebook-share-url'] : window.location.href;
+                twitterUrl = currentItem.hasOwnProperty('data-twitter-share-url') ? currentItem['data-twitter-share-url'] : window.location.href;
+                twitterText = currentItem.hasOwnProperty('data-tweet-text') ? currentItem['data-tweet-text'] : '';
+                googlePlusUrl = currentItem.hasOwnProperty('data-googleplus-share-url') ? currentItem['data-googleplus-share-url'] : window.location.href;
+                pinterestUrl = currentItem.hasOwnProperty('data-pinterest-share-url') ? currentItem['data-pinterest-share-url'] : window.location.href;
+                pinterestMediaUrl = currentItem.hasOwnProperty('src') ? currentItem.src : currentItem['data-src'];
+                pinterestText = currentItem.hasOwnProperty('data-pinterest-text') ? currentItem.href : '';
+            } else {
+                fbUrl = currentItem.getAttribute('data-facebook-share-url') || window.location.href;
+                twitterUrl = currentItem.getAttribute('data-twitter-share-url') || window.location.href;
+                twitterText = currentItem.getAttribute('data-tweet-text') || '';
+                googlePlusUrl = currentItem.getAttribute('data-googleplus-share-url') || window.location.href;
+                pinterestUrl = currentItem.getAttribute('data-pinterest-share-url') || window.location.href;
+                pinterestMediaUrl = currentItem.getAttribute('href') || currentItem.getAttribute('data-src');
+                pinterestText = currentItem.getAttribute('data-pinterest-text') || '';
+            }
 
-            document.getElementById('lg-share-twitter').setAttribute('href', 'https://twitter.com/intent/tweet?text=' + _this.core.items[event.detail.index].getAttribute('data-tweet-text') + '&url=' + (encodeURIComponent(_this.core.items[event.detail.index].getAttribute('data-twitter-share-url') || window.location.href)));
-
-            document.getElementById('lg-share-googleplus').setAttribute('href', 'https://plus.google.com/share?url=' + (encodeURIComponent(_this.core.items[event.detail.index].getAttribute('data-googleplus-share-url') || window.location.href)));
-
-            document.getElementById('lg-share-pinterest').setAttribute('href', 'http://www.pinterest.com/pin/create/button/?url=' + (encodeURIComponent(_this.core.items[event.detail.index].getAttribute('data-pinterest-share-url') || window.location.href)) + '&media=' + encodeURIComponent(_this.core.items[event.detail.index].getAttribute('href') || _this.core.items[event.detail.index].getAttribute('data-src')) + '&description=' + _this.core.items[event.detail.index].getAttribute('data-pinterest-text'));
-
+            if (_this.core.s.facebook) {
+                document.getElementById('lg-share-facebook').setAttribute('href', 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(fbUrl));
+            }
+            if (_this.core.s.twitter) {
+                document.getElementById('lg-share-twitter').setAttribute('href', 'https://twitter.com/intent/tweet?text=' + twitterText + '&url=' + encodeURIComponent(twitterUrl));
+            }
+            if (_this.core.s.googlePlus) {
+                document.getElementById('lg-share-googleplus').setAttribute('href', 'https://plus.google.com/share?url=' + encodeURIComponent(googlePlusUrl));
+            }
+            if (_this.core.s.pinterest) {
+                document.getElementById('lg-share-pinterest').setAttribute('href', 'http://www.pinterest.com/pin/create/button/?url=' + encodeURIComponent(pinterestUrl) + '&media=' + encodeURIComponent(pinterestMediaUrl) + '&description=' + pinterestText);
+            }
         }, 100);
     });
 };
