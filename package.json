@@ -1,6 +1,6 @@
 {
   "name": "lg-share.js",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Social media share module for lightgallery.",
   "keywords": [
     "gallery",
@@ -25,7 +25,7 @@
   "bugs": {
     "url": "https://github.com/sachinchoolur/lg-share.js/issues"
   },
-  "license": "Apache-2.0",
+  "license": "GPLv3",
   "author": {
     "name": "Sachin N",
     "email": "sachi77n@gmail.com",
@@ -58,6 +58,6 @@
     "build-min": "uglifyjs dist/lg-share.js --comments '/@license/' -m screw_ie8=true -c screw_ie8=true,unused=false -o dist/lg-share.min.js",
     "build-watch": "watchify src/lg-share.js -s LgShare -t [babelify] -o dist/lg-share.js -v",
     "dev": "watchify src/lg-share.js -s LgShare -t [babelify] -o ../lightgallery.js/lightgallery/js/lg-share.js -v",
-    "lint": "jshint src/*.js"
+    "lint": "jshint src"
   }
 }
