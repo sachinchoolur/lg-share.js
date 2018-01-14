@@ -1,5 +1,5 @@
 /**!
- * lg-share.js | 1.2.0 | January 14th 2018
+ * lg-share.js | 1.2.2 | January 14th 2018
  * http://sachinchoolur.github.io/lg-share.js
  * Copyright (c) 2016 Sachin N; 
  * @license GPLv3 
