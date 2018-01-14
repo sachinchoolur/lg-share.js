@@ -10,6 +10,12 @@ var shareSefaults = {
     pinterestDropdownText: 'Pinterest'
 };
 
+function toCamelCase(input) { 
+    return input.toLowerCase().replace(/-(.)/g, function(match, group1) {
+        return group1.toUpperCase();
+    });
+}
+
 var Share = function(element) {
 
     this.el = element;
@@ -55,7 +61,7 @@ Share.prototype.init = function() {
                 document.getElementById('lg-share-facebook').setAttribute('href', 'https://www.facebook.com/sharer/sharer.php?u=' + _this.getSharePropsUrl(event.detail.index, 'data-facebook-share-url'));
               }
               if (_this.core.s.twitter) {
-                document.getElementById('lg-share-twitter').setAttribute('href', 'https://twitter.com/intent/tweet?text=' + _this.getShareProps(event.detail.index, 'data-tweet-text') + '&url=' + _this.getSharePropsUrl(event.detail.index, 'data-twitter-share-url'))
+                document.getElementById('lg-share-twitter').setAttribute('href', 'https://twitter.com/intent/tweet?text=' + _this.getShareProps(event.detail.index, 'data-tweet-text') + '&url=' + _this.getSharePropsUrl(event.detail.index, 'data-twitter-share-url'));
               }
               if(_this.core.s.googlePlus) {
                 document.getElementById('lg-share-googleplus').setAttribute('href', 'https://plus.google.com/share?url=' + _this.getSharePropsUrl(event.detail.index, 'data-googleplus-share-url'));
@@ -78,11 +84,11 @@ Share.prototype.getSharePropsUrl = function (index, prop) {
 
 
 Share.prototype.getShareProps = function (index, prop) {
-    var shareProp = undefined;
+    var shareProp = '';
     if (this.core.s.dynamic) {
-        shareProp = this.core.items[index][prop];
+        shareProp = this.core.items[index][toCamelCase(prop.replace('data-', ''))];
     } else if (this.core.items[index].getAttribute(prop)) {
-        shareProp = this.core.items[index].getAttribute(prop)
+        shareProp = this.core.items[index].getAttribute(prop);
     }
     return shareProp;
 };
