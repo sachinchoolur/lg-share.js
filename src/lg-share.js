@@ -7,7 +7,9 @@ var shareSefaults = {
     googlePlus: true,
     googlePlusDropdownText: 'GooglePlus',
     pinterest: true,
-    pinterestDropdownText: 'Pinterest'
+    pinterestDropdownText: 'Pinterest',
+    whatsapp: true,
+    whatsappDropdownText: 'Pinterest'
 };
 
 function toCamelCase(input) { 
@@ -38,6 +40,7 @@ Share.prototype.init = function() {
     shareHtml += _this.core.s.twitter ? '<li><a id="lg-share-twitter" target="_blank"><span class="lg-icon"></span><span class="lg-dropdown-text">' + this.core.s.twitterDropdownText + '</span></a></li>' : '';
     shareHtml += _this.core.s.googlePlus ? '<li><a id="lg-share-googleplus" target="_blank"><span class="lg-icon"></span><span class="lg-dropdown-text">' + this.core.s.googlePlusDropdownText + '</span></a></li>' : '';
     shareHtml += _this.core.s.pinterest ? '<li><a id="lg-share-pinterest" target="_blank"><span class="lg-icon"></span><span class="lg-dropdown-text">' + this.core.s.pinterestDropdownText + '</span></a></li>' : '';
+    shareHtml += _this.core.s.whatsappt ? '<li><a id="lg-share-whatsapp" target="_blank"><span class="lg-icon"></span><span class="lg-dropdown-text">' + this.core.s.whatsappDropdownText + '</span></a></li>' : '';
     shareHtml += '</ul></span>';
 
     this.core.outer.querySelector('.lg-toolbar').insertAdjacentHTML('beforeend', shareHtml);
@@ -60,6 +63,7 @@ Share.prototype.init = function() {
             if (_this.core.s.facebook) {
                 document.getElementById('lg-share-facebook').setAttribute('href', 'https://www.facebook.com/sharer/sharer.php?u=' + _this.getSharePropsUrl(event.detail.index, 'data-facebook-share-url'));
               }
+        
               if (_this.core.s.twitter) {
                 document.getElementById('lg-share-twitter').setAttribute('href', 'https://twitter.com/intent/tweet?text=' + _this.getShareProps(event.detail.index, 'data-tweet-text') + '&url=' + _this.getSharePropsUrl(event.detail.index, 'data-twitter-share-url'));
               }
@@ -68,6 +72,9 @@ Share.prototype.init = function() {
               }
               if(_this.core.s.pinterest) {
                 document.getElementById('lg-share-pinterest').setAttribute('href', 'http://www.pinterest.com/pin/create/button/?url=' + _this.getSharePropsUrl(event.detail.index, 'data-pinterest-share-url') + '&media=' + encodeURIComponent(_this.getShareProps(event.detail.index, 'href') || _this.getShareProps(event.detail.index, 'data-src')) + '&description=' + _this.getShareProps(event.detail.index, 'data-pinterest-text'));
+              }
+              if (_this.core.s.whatsapp) {
+                document.getElementById('lg-share-whatsapp').setAttribute('href', 'https://wa.me/?text=' + _this.getSharePropsUrl(event.detail.index, 'data-whatsapp-share-url'));
               }
         }, 100);
     });
