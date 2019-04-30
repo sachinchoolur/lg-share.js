@@ -9,7 +9,7 @@ Full featured javascript gallery. Zero dependencies.
 Main features
 ---
 
-* Allows to share slides to Facebook, Twitter, Google plus and pinterest.
+* Allows to share slides to Facebook, Twitter and pinterest.
 * Option to provide custom url and description.
  
 Browser support
