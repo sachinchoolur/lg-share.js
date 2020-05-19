@@ -32,26 +32,30 @@ var Share = function(element) {
 
 Share.prototype.init = function() {
     var _this = this;
-    var shareHtml = '<span id="lg-share" class="lg-icon">' +
+    var shareHtml = '<button aria-label="Share" aria-haspopup="true" aria-expanded="false" id="lg-share" class="lg-icon">' +
         '<ul class="lg-dropdown" style="position: absolute;">';
     shareHtml += _this.core.s.facebook ? '<li><a id="lg-share-facebook" target="_blank"><span class="lg-icon"></span><span class="lg-dropdown-text">' + this.core.s.facebookDropdownText + '</span></a></li>' : '';
     shareHtml += _this.core.s.twitter ? '<li><a id="lg-share-twitter" target="_blank"><span class="lg-icon"></span><span class="lg-dropdown-text">' + this.core.s.twitterDropdownText + '</span></a></li>' : '';
     shareHtml += _this.core.s.googlePlus ? '<li><a id="lg-share-googleplus" target="_blank"><span class="lg-icon"></span><span class="lg-dropdown-text">' + this.core.s.googlePlusDropdownText + '</span></a></li>' : '';
     shareHtml += _this.core.s.pinterest ? '<li><a id="lg-share-pinterest" target="_blank"><span class="lg-icon"></span><span class="lg-dropdown-text">' + this.core.s.pinterestDropdownText + '</span></a></li>' : '';
-    shareHtml += '</ul></span>';
+    shareHtml += '</ul></button>';
 
     this.core.outer.querySelector('.lg-toolbar').insertAdjacentHTML('beforeend', shareHtml);
     this.core.outer.querySelector('.lg').insertAdjacentHTML('beforeend', '<div id="lg-dropdown-overlay"></div>');
-    utils.on(document.getElementById('lg-share'), 'click.lg', function() {
+    var shareButton = document.getElementById('lg-share');
+    utils.on(shareButton, 'click.lg', function() {
         if (utils.hasClass(_this.core.outer, 'lg-dropdown-active')) {
             utils.removeClass(_this.core.outer, 'lg-dropdown-active');
+            shareButton.setAttribute('aria-expanded', false);
         } else {
             utils.addClass(_this.core.outer, 'lg-dropdown-active');
+            shareButton.setAttribute('aria-expanded', true);
         }
     });
 
     utils.on(document.getElementById('lg-dropdown-overlay'), 'click.lg', function() {
         utils.removeClass(_this.core.outer, 'lg-dropdown-active');
+        shareButton.setAttribute('aria-expanded', false);
     });
 
     utils.on(_this.core.el, 'onAfterSlide.lgtm', function(event) {
